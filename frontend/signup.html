@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Sign Up | Smart Waste Management</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(135deg, #0b3d20, #198754, #7bcf8a);
+            position: relative;
+        }
+
+        .background {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+
+        .circle {
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.12);
+            animation: float 8s infinite ease-in-out;
+        }
+
+        .circle:nth-child(1) {
+            width: 250px;
+            height: 250px;
+            top: -80px;
+            left: -80px;
+        }
+
+        .circle:nth-child(2) {
+            width: 180px;
+            height: 180px;
+            right: 5%;
+            top: 10%;
+            animation-delay: 2s;
+        }
+
+        .circle:nth-child(3) {
+            width: 300px;
+            height: 300px;
+            bottom: -120px;
+            left: 10%;
+            animation-delay: 4s;
+        }
+
+        .circle:nth-child(4) {
+            width: 150px;
+            height: 150px;
+            right: 15%;
+            bottom: -50px;
+            animation-delay: 1s;
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0) rotate(0deg);
+            }
+
+            50% {
+                transform: translateY(-30px) rotate(20deg);
+            }
+        }
+
+        .signup-container {
+            position: relative;
+            z-index: 2;
+            width: 430px;
+            padding: 35px 40px;
+            border-radius: 25px;
+
+            background: rgba(255,255,255,0.94);
+
+            backdrop-filter: blur(15px);
+
+            box-shadow:
+                0 25px 60px rgba(0,0,0,0.25);
+
+            animation: cardEntry 0.9s ease forwards;
+        }
+
+        @keyframes cardEntry {
+            from {
+                opacity: 0;
+                transform: translateY(50px) scale(0.9);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        .logo {
+            text-align: center;
+            font-size: 55px;
+            animation: logoBounce 2s infinite ease-in-out;
+        }
+
+        @keyframes logoBounce {
+            0%, 100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-8px);
+            }
+        }
+
+        h1 {
+            text-align: center;
+            color: #176b2c;
+            margin-top: 8px;
+            font-size: 28px;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #666;
+            margin-top: 8px;
+            margin-bottom: 22px;
+        }
+
+        .input-group {
+            position: relative;
+            margin-bottom: 16px;
+        }
+
+        .input-group span {
+            position: absolute;
+            left: 14px;
+            top: 13px;
+            font-size: 19px;
+            transition: 0.3s;
+        }
+
+        input {
+            width: 100%;
+            padding: 13px 45px;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            font-size: 16px;
+            outline: none;
+            transition: 0.3s;
+        }
+
+        input:focus {
+            border-color: #2e7d32;
+            box-shadow: 0 0 0 4px rgba(46,125,50,0.12);
+            transform: translateY(-2px);
+        }
+
+        .eye {
+            position: absolute;
+            right: 15px;
+            top: 12px;
+            cursor: pointer;
+            font-size: 19px;
+        }
+
+        button {
+            width: 100%;
+            padding: 14px;
+            margin-top: 8px;
+
+            border: none;
+            border-radius: 10px;
+
+            background: linear-gradient(
+                90deg,
+                #1b5e20,
+                #2e7d32,
+                #43a047
+            );
+
+            background-size: 200%;
+
+            color: white;
+            font-size: 17px;
+            font-weight: bold;
+
+            cursor: pointer;
+
+            transition: 0.3s;
+
+            animation: buttonGradient 4s infinite linear;
+        }
+
+        @keyframes buttonGradient {
+            0% {
+                background-position: 0%;
+            }
+
+            100% {
+                background-position: 200%;
+            }
+        }
+
+        button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(46,125,50,0.3);
+        }
+
+        button:active {
+            transform: scale(0.97);
+        }
+
+        .login {
+            text-align: center;
+            margin-top: 20px;
+            color: #666;
+        }
+
+        .login a {
+            color: #2e7d32;
+            font-weight: bold;
+            text-decoration: none;
+        }
+
+        .login a:hover {
+            text-decoration: underline;
+        }
+
+        #message {
+            text-align: center;
+            margin-top: 12px;
+            font-weight: bold;
+        }
+
+        @media (max-width: 500px) {
+            .signup-container {
+                width: 90%;
+                padding: 30px 25px;
+            }
+
+            h1 {
+                font-size: 23px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="background">
+        <div class="circle"></div>
+        <div class="circle"></div>
+        <div class="circle"></div>
+        <div class="circle"></div>
+    </div>
+
+    <div class="signup-container">
+
+        <div class="logo">♻️</div>
+
+        <h1>Create Account</h1>
+
+        <div class="subtitle">
+            Join the Smart Waste Management System
+        </div>
+
+        <form id="signupForm">
+
+            <div class="input-group">
+
+                <input
+                    type="text"
+                    id="name"
+                    placeholder="Full name"
+                    required
+                >
+
+                <span>👤</span>
+
+            </div>
+
+            <div class="input-group">
+
+                <input
+                    type="email"
+                    id="email"
+                    placeholder="Email address"
+                    required
+                >
+
+                <span>📧</span>
+
+            </div>
+
+            <div class="input-group">
+
+                <input
+                    type="password"
+                    id="password"
+                    placeholder="Create password"
+                    required
+                >
+
+                <span>🔒</span>
+
+                <div
+                    class="eye"
+                    onclick="togglePassword('password')"
+                >
+                    👁️
+                </div>
+
+            </div>
+
+            <div class="input-group">
+
+                <input
+                    type="password"
+                    id="confirmPassword"
+                    placeholder="Confirm password"
+                    required
+                >
+
+                <span>🔐</span>
+
+                <div
+                    class="eye"
+                    onclick="togglePassword('confirmPassword')"
+                >
+                    👁️
+                </div>
+
+            </div>
+
+            <button type="submit">
+                Create Account
+            </button>
+
+        </form>
+
+        <div id="message"></div>
+
+        <div class="login">
+            Already have an account?
+            <a href="login.html">Login</a>
+        </div>
+
+    </div>
+
+    <script>
+
+        function togglePassword(id) {
+
+            const password =
+                document.getElementById(id);
+
+            if (password.type === "password") {
+                password.type = "text";
+            } else {
+                password.type = "password";
+            }
+        }
+
+    </script>
+
+</body>
+</html>
