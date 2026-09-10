@@ -1,23 +1,19 @@
 from ultralytics import YOLO
-
 from waste_classifier import classify_waste
 
-
-model = YOLO("best.pt")
+# Use the lightweight ONNX model
+model = YOLO("best.onnx")
 
 
 def detect_waste(image_path: str):
-
-    results = model(image_path)
+    results = model(image_path, imgsz=320)
 
     detections = []
 
     for result in results:
-
         for box in result.boxes:
 
             class_id = int(box.cls[0])
-
             confidence = float(box.conf[0])
 
             class_name = result.names[class_id]
