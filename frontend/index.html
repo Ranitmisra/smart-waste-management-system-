@@ -437,7 +437,7 @@
             try {
 
                 const response = await fetch(
-                    "http://127.0.0.1:8000/upload-image",
+                    "https://smart-waste-management-system-nexora.onrender.com/upload-image",
                     {
                         method: "POST",
                         body: formData
@@ -537,7 +537,7 @@
     try {
 
         const response = await fetch(
-            "http://127.0.0.1:8000/dispose",
+            "https://smart-waste-management-system-nexora.onrender.com/dispose",
             {
                 method: "POST",
 
@@ -627,7 +627,7 @@ async function addSanitization() {
     try {
 
         const response = await fetch(
-            "http://127.0.0.1:8000/sanitization",
+            "https://smart-waste-management-system-nexora.onrender.com/sanitization",
             {
                 method: "POST",
 
@@ -690,7 +690,7 @@ async function loadDashboardStats() {
     try {
 
         const response = await fetch(
-            "http://127.0.0.1:8000/dashboard-stats"
+            "https://smart-waste-management-system-nexora.onrender.com/dashboard-stats"
         );
 
         const data = await response.json();
@@ -719,7 +719,7 @@ document.getElementById("totalImages").innerText =
             data.total_sanitization;
             // Waste category statistics
 const wasteResponse = await fetch(
-    "http://127.0.0.1:8000/recent-waste"
+    "https://smart-waste-management-system-nexora.onrender.com/recent-waste"
 );
 
 const wasteRecords = await wasteResponse.json();
@@ -766,7 +766,7 @@ async function loadRecentWaste() {
     try {
 
         const response = await fetch(
-            "http://127.0.0.1:8000/recent-waste"
+            "https://smart-waste-management-system-nexora.onrender.com/recent-waste"
         );
 
         const records = await response.json();
