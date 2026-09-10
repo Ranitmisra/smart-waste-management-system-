@@ -1,18 +1,28 @@
-from fastapi import FastAPI, UploadFile, File
+from fastapi import FastAPI, UploadFile, File, Depends
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
-
+from pwdlib import PasswordHash
 
 from waste_classifier import classify_waste
 from ai_classifier import detect_waste
 
 from database import SessionLocal, engine
-from models import Base, WasteRecord, ImageRecord, SanitizationRecord
+from sqlalchemy.orm import Session
+from models import Base, WasteRecord, ImageRecord, SanitizationRecord, User
 
 import os
 import shutil
 
+password_hash = PasswordHash.recommended()
+
 Base.metadata.create_all(bind=engine)
+
+def get_db():
+    db = SessionLocal()
+    try:
+        yield db
+    finally:
+        db.close()
 
 class DisposalRequest(BaseModel):
     waste_name: str
@@ -254,4 +264,74 @@ def dashboard_stats():
         "waste_segregation": waste_count,
         "disposal_tracking": disposal_count,
         "sanitization": sanitization_count
+    }
+from pydantic import BaseModel
+
+
+class SignupRequest(BaseModel):
+    name: str
+    email: str
+    password: str
+
+
+@app.post("/signup")
+def signup(user: SignupRequest, db: Session = Depends(get_db)):
+
+    existing_user = db.query(User).filter(
+        User.email == user.email
+    ).first()
+
+    if existing_user:
+        return {
+            "success": False,
+            "message": "Email already registered"
+        }
+
+    new_user = User(
+        name=user.name,
+        email=user.email,
+        password=password_hash.hash(user.password)
+    )
+
+    db.add(new_user)
+    db.commit()
+    db.refresh(new_user)
+
+    return {
+        "success": True,
+        "message": "Account created successfully"
+    }
+
+class LoginRequest(BaseModel):
+    email: str
+    password: str
+
+
+@app.post("/login")
+def login(user: LoginRequest, db: Session = Depends(get_db)):
+
+    existing_user = db.query(User).filter(
+        User.email == user.email
+    ).first()
+
+    if not existing_user:
+        return {
+            "success": False,
+            "message": "Invalid email or password"
+        }
+
+    if not password_hash.verify(
+        user.password,
+        existing_user.password
+    ):
+        return {
+            "success": False,
+            "message": "Invalid email or password"
+        }
+
+    return {
+        "success": True,
+        "message": "Login successful",
+        "name": existing_user.name,
+        "email": existing_user.email
     }
