@@ -1,0 +1,31 @@
+# Python virtual environment
+backend/venv/
+
+# Python cache
+__pycache__/
+*.pyc
+
+# Ultralytics cache
+*.cache
+
+# Uploaded images
+backend/uploads/
+
+# Local database
+backend/database.db
+
+# Environment variables
+.env
+
+# VS Code local settings
+.vscode/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Training and prediction results
+runs/
+
+# Dataset used for model training
+waste_dataset/
